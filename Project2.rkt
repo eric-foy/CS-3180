@@ -37,7 +37,10 @@
 	               (loop2 set1sub (cdr set2sub) set2big))
                      (if (number? (car set2sub))
 	               (loop2 set1sub (cdr set2sub) set2big)
-	               (set-equal? (car set1sub) (car set2sub))))))))
+		       (begin
+			 (define c (loop1 (car set1sub) (car set2sub)))
+			 (define d (loop1 (car set2sub) (car set1sub)))
+			 (if (eqv? c d) c #f))))))))
               (begin
 		(define a (loop1 set1 set2))
 	        (define b (loop1 set2 set1))
