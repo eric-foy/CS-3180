@@ -41,6 +41,22 @@
                     (b (loop1 set2 set1)))
                 (if (eqv? a b) a #f)))))
 
+(define union
+  (lambda (set1 set2)
+    (letrec ((loop (lambda (set1 o)
+                     (if (null? set1) (prune (sort o <) '())
+                       (loop (cdr set1) (cons (car set1) o)))))
+             (prune (lambda (l o)
+                      (if (null? (cdr l))
+                        (list-rev (cons (car l) o) '())
+                        (if (= (car l) (car (cdr l)))
+                          (prune (cdr l) o)
+                          (prune (cdr l) (cons (car l) o))))))
+             (list-rev (lambda (l o)
+                   (if (null? l) o
+                     (list-rev (cdr l) (cons (car l) o))))))
+      (loop set1 set2))))
+
 (define bubble-sort
   (lambda (l)
     (letrec ((loop1 (lambda (l o1)
