@@ -379,3 +379,9 @@
 (display " = (1 2 3 4 5 6 7") (newline)
 (union '(3 2 5 5 7 6) '(4 1 4))
 (display " = (1 2 3 4 5 6 7") (newline)
+
+(display "empty set") (newline)
+(union '() '(1 2 3 4 5))
+(display " = (1 2 3 4 5)") (newline)
+(union '(1 2 3 4 5) '())
+(display " = (1 2 3 4 5)") (newline)
