@@ -60,3 +60,33 @@
                        (if (null? l) o
                          (list-rev (cdr l) (cons (car l) o))))))
           (loop set1 set2))))))
+
+(define intersection
+  (lambda (set1 set2)
+    (if (equal? set1 '())
+      set2
+      (if (equal? set2 '())
+        set1
+        (letrec ((main (lambda (a b)
+                         (merge
+                           (prune (sort a <) '())
+                           (prune (sort b <) '()))))
+                 (merge (lambda (set1 o)
+                         (if (null? set1) (rprune (sort o <) '())
+                           (merge (cdr set1) (cons (car set1) o)))))
+                 (prune (lambda (l o)
+                          (if (null? (cdr l))
+                            (cons (car l) o)
+                            (if (= (car l) (car (cdr l)))
+                              (prune (cdr l) o)
+                              (prune (cdr l) (cons (car l) o))))))
+                 (rprune (lambda (l o)
+                          (if (null? (cdr l))
+                            (list-rev o '())
+                            (if (= (car l) (car (cdr l)))
+                              (rprune (cdr l) (cons (car l) o))
+                              (rprune (cdr l) o)))))
+                 (list-rev (lambda (l o)
+                       (if (null? l) o
+                         (list-rev (cdr l) (cons (car l) o))))))
+          (main set1 set2))))))
