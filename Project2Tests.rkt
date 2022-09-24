@@ -386,6 +386,22 @@
 (union '(1 2 3 4 5) '())
 (display " = (1 2 3 4 5)") (newline)
 
+(display "one intersected") (newline)
+(union '(1 2 3) '(3 4 5))
+(display " = (1 2 3 4 5)") (newline)
+
+(display "two intersected") (newline)
+(union '(1 2 3) '(2 3 4))
+(display " = (1 2 3 4)") (newline)
+
+(display "five intersected") (newline)
+(union '(1 2 3 4 5 6) '(2 3 4 5 6 7))
+(display " = (1 2 3 4 5 6 7)") (newline)
+
+(display "same sets") (newline)
+(union '(2 3 4 5 6) '(2 3 4 5 6))
+(display " = (2 3 4 5 6)") (newline)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; intersection
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
