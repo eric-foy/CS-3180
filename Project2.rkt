@@ -64,9 +64,9 @@
 (define intersection
   (lambda (set1 set2)
     (if (equal? set1 '())
-      set2
+      '()
       (if (equal? set2 '())
-        set1
+        '()
         (letrec ((main (lambda (a b)
                          (merge
                            (prune (sort a <) '())
