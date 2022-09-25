@@ -90,3 +90,36 @@
                        (if (null? l) o
                          (list-rev (cdr l) (cons (car l) o))))))
           (main set1 set2))))))
+
+(define mergesort
+  (lambda (lst)
+    (letrec ((main (lambda (l)
+                     (if (null? (cdr l)) l
+                       (main-aux (list-rev (low l (mid l) 0 '()) '())
+                                 (list-rev (high l (mid l) 0 '()) '())))))
+             (main-aux (lambda (left right)
+                         (merge (main left) (main right) '())))
+             (list-rev (lambda (l o)
+                   (if (null? l) o
+                     (list-rev (cdr l) (cons (car l) o)))))
+             (merge (lambda (left right o)
+                      (if (null? left)
+                        (if (null? right)
+                          (list-rev o '())
+                          (merge left (cdr right) (cons (car right) o)))
+                        (if (null? right)
+                          (merge (cdr left) right (cons (car left) o))
+                          (if (<= (car left) (car right))
+                            (merge (cdr left) right (cons (car left) o))
+                            (merge left (cdr right) (cons (car right) o)))))))
+             (mid (lambda (l)
+                    (ceiling (/ (length l) 2))))
+             (low (lambda (l m i o)
+                    (if (= i m) o
+                      (low (cdr l) m (+ i 1) (cons (car l) o)))))
+             (high (lambda (l m i o)
+                     (if (>= i m)
+                       (if (null? (cdr l)) (cons (car l) o)
+                         (high (cdr l) m (+ i 1) (cons (car l) o)))
+                       (high (cdr l) m (+ i 1) o)))))
+      (main lst))))
