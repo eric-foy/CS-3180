@@ -122,3 +122,18 @@
                        (high (cdr l) m (+ i 1) o)))))
       (if (null? lst) '()
         (main lst)))))
+
+(define powerset
+  (lambda (lst)
+    (letrec ((main (lambda (l o)
+                     (if (null? l) (cons '() o)
+                       (main 
+                         (cdr l)
+                         (main-aux o (car l) o)))))
+             (main-aux (lambda (l a o)
+                         (if (null? l) (cons (cons a '()) o)
+                           (main-aux
+                             (cdr l)
+                             a
+                             (cons (cons a (car l)) o))))))
+      (main lst '()))))
