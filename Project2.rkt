@@ -122,4 +122,5 @@
                        (if (null? (cdr l)) (cons (car l) o)
                          (high (cdr l) m (+ i 1) (cons (car l) o)))
                        (high (cdr l) m (+ i 1) o)))))
-      (main lst))))
+      (if (null? lst) '()
+        (main lst)))))
