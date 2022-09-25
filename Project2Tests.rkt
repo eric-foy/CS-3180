@@ -574,3 +574,48 @@
 (display " = (3)") (newline)
 (intersection '(1 2 3) '(3 4 5))
 (display " = (3)") (newline)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; mergesort
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(display "from handout") (newline)
+(mergesort '(3 1 2 7 9))
+(display " =  (1 2 3 7 9)") (newline)
+
+(display "empty") (newline)
+(mergesort '())
+(display " = ()") (newline)
+
+(display "sorted") (newline)
+(mergesort '(1 2 3 4 5 6))
+(display " = (1 2 3 4 5 6)") (newline)
+
+(display "reverse sorted") (newline)
+(mergesort '(6 5 4 3 2 1))
+(display " = (1 2 3 4 5 6)") (newline)
+
+(display "one") (newline)
+(mergesort '(5))
+(display " = (5)") (newline)
+
+(display "two") (newline)
+(mergesort '(9 5))
+(display " = (5 9)") (newline)
+
+(display "three") (newline)
+(mergesort '(9 10 4))
+(display " = (4 9 10)") (newline)
+
+(display "four") (newline)
+(mergesort '(55 12 5 1002))
+(display " = (5 12 55 1002)") (newline)
+
+(display "five") (newline)
+(mergesort '(5 2 1 3 4))
+(display " = (1 2 3 4 5)") (newline)
+
+(display "twenty") (newline)
+(mergesort '(5 3 2 1 9 8 10 7 6 11 12 14 13 15 18 20 19 17 16))
+(display " = (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)") (newline)
+
