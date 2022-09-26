@@ -619,3 +619,26 @@
 (mergesort '(5 3 2 1 9 8 10 7 6 11 12 14 13 15 18 20 19 17 16))
 (display " = (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)") (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; powerset
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(display "handout") (newline)
+(powerset '(1 3 5))
+(display " = (() (5) (5 1) (5 3 1) (5 3) (3) (3 1) (1))") (newline)
+
+(display "empty") (newline)
+(powerset '())
+(display " = (())") (newline)
+
+(display "one") (newline)
+(powerset '(1))
+(display " = (() (1))") (newline)
+
+(display "two") (newline)
+(powerset '(1 2))
+(display " = (() (2) (2 1) (1))") (newline)
+
+(display "five") (newline)
+(length (powerset '(55 2 13 9 10)))
+(display " = 32") (newline)
