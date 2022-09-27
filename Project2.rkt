@@ -137,3 +137,20 @@
                              a
                              (cons (cons a (car l)) o))))))
       (main lst '()))))
+
+(define nested-reduce
+  (lambda (lst)
+    (letrec ((main (lambda (l o)
+                     (if (null? l) (list-rev o '())
+                       (main
+                         (list-rev (prune l (car l) '()) '())
+                         (cons (car l) o)))))
+             (prune (lambda (l a o)
+                      (if (null? l) o
+                        (if (equal? (car l) a)
+                          (prune (cdr l) a o)
+                          (prune (cdr l) a (cons (car l) o))))))
+             (list-rev (lambda (l o)
+                   (if (null? l) o
+                     (list-rev (cdr l) (cons (car l) o))))))
+      (main lst '()))))
