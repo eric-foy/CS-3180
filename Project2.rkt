@@ -136,6 +136,8 @@
                              (cons (cons a (car l)) o))))))
       (main lst '()))))
 
+; lst made up of integers and lists of integers.
+; So assuming if not list then integer.
 (define nested-reduce
   (lambda (lst)
     (letrec ((main (lambda (l o)
@@ -145,9 +147,19 @@
                          (cons (car l) o)))))
              (prune (lambda (l a o)
                       (if (null? l) o
-                        (if (equal? (car l) a)
-                          (prune (cdr l) a o)
-                          (prune (cdr l) a (cons (car l) o))))))
+                        (if (list? a)
+                          (if (list? (car l))
+                            (if (equal?
+                                  (main (car l) '())
+                                  (main a '()))
+                              (prune (cdr l) a o)
+                              (prune (cdr l) a (cons (main (car l) '()) o)))
+                            (prune (cdr l) a (cons (car l) o)))
+                          (if (list? (car l))
+                            (prune (cdr l) a (cons (car l) o))
+                            (if (= a (car l))
+                              (prune (cdr l) a o)
+                              (prune (cdr l) a (cons (car l) o))))))))
              (list-rev (lambda (l o)
                    (if (null? l) o
                      (list-rev (cdr l) (cons (car l) o))))))
