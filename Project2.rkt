@@ -144,7 +144,9 @@
                      (if (null? l) (list-rev o '())
                        (main
                          (list-rev (prune l (car l) '()) '())
-                         (cons (car l) o)))))
+                         (if (list? (car l))
+                           (cons (main (car l) '()) o)
+                           (cons (car l) o))))))
              (prune (lambda (l a o)
                       (if (null? l) o
                         (if (list? a)
