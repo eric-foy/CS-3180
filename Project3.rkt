@@ -18,7 +18,8 @@
 ; make-deck (10 pts) -- Creates a new (unshuffled) 52 card deck
 ; Parameters: none
 ; Returns: The deck (a list of cards)
-; Notes: Depends on the global definitions of faces and suits.
+; Notes: Depends on the global definitions of faces and suits.  Shuffle with
+; (shuffle thedeck)
 ; Example: (define thedeck (make-deck))
 (define make-deck
   (lambda ()
@@ -34,6 +35,39 @@
 ; Parameter: hand -- A list of cards to evaluate
 ; Returns: The best possible value of the hand
 ; Example: (display (eval-hand playerhand))
+(define eval-hand
+  (lambda (hand)
+    (letrec ((main (lambda (h o a)
+                     (if (null? h)
+                       (avalue a o)
+                       (main
+                         (cdr h)
+                         (hvalue (car (car h)) o)
+                         (acount (car (car h)) a)))))
+             (hvalue (lambda (c o)
+                       (case c
+                         ((2) (+ 2 o))
+                         ((3) (+ 3 o))
+                         ((4) (+ 4 o))
+                         ((5) (+ 5 o))
+                         ((6) (+ 6 o))
+                         ((7) (+ 7 o))
+                         ((8) (+ 8 o))
+                         ((9) (+ 9 o))
+                         ((10) (+ 10 o))
+                         ((J) (+ 10 o))
+                         ((Q) (+ 10 o))
+                         ((K) (+ 10 o))
+                         ((A) o)
+                         (else (display "error in face value")))))
+             (acount (lambda (c a)
+                       (if (equal? c 'A) (+ a 1) a)))
+             (avalue (lambda (a o)
+                       (if (= a 0) o
+                         (if (> (+ o 11) 21)
+                           (avalue (- a 1) (+ o 1))
+                           (avalue (- a 1) (+ o 11)))))))
+      (main hand 0 0))))
 
 ; deal! (10 pts) -- Create a two card hand, by removing the top two cards from the deck.
 ; Parameter: deck -- The deck to deal from
