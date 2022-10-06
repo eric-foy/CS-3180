@@ -1,0 +1,17 @@
+(define card1 (cons 'J 'Diamonds))
+(define card2 (cons 9 'Spades))
+(define card3 (cons 'A 'Hearts))
+(define card4 (cons 'A 'Clubs))
+(define card5 (cons 2 'Diamonds))
+(define card6 (cons 5 'Spades))
+(define card7 (cons 10 'Hearts))
+(define card8 (cons 'K 'Clubs))
+(define card9 (cons 7 'Diamonds))
+
+(define hand1 (list (make-card 'A 'Clubs)
+                    (make-card 8 'Spades)
+                    (make-card 2 'Diamonds)))
+
+(display "make-deck") (newline)
+(length (make-deck))
+(display " = 52") (newline)

@@ -4,17 +4,6 @@
 (define faces '(2 3 4 5 6 7 8 9 10 J Q K A))
 (define suits '(Clubs Diamonds Hearts Spades))
 
-(define card1 (cons 'J 'Diamonds))
-(define card2 (cons 9 'Spades))
-
-(define make-card
-  (lambda (face suit)
-    (cons face suit)))
-
-(define hand1 (list (make-card 'A 'Clubs)
-                    (make-card 8 'Spades)
-                    (make-card 2 'Diamonds)))
-
 ; make-deck (10 pts) -- Creates a new (unshuffled) 52 card deck
 ; Parameters: none
 ; Returns: The deck (a list of cards)
