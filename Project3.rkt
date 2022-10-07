@@ -52,10 +52,21 @@
              (acount (lambda (c a)
                        (if (equal? c 'A) (+ a 1) a)))
              (avalue (lambda (a o)
-                       (if (= a 0) o
-                         (if (> (+ o 11) 21)
-                           (avalue (- a 1) (+ o 1))
-                           (avalue (- a 1) (+ o 11)))))))
+                       (case a
+                         ((0) o)
+                         ((1) (if (> (+ o 11) 21)
+                                (+ o 1)
+                                (+ o 11)))
+                         ((2) (if (> (+ o 12) 21)
+                                (+ o 2)
+                                (+ o 12)))
+                         ((3) (if (> (+ o 13) 21)
+                                (+ o 3)
+                                (+ o 13)))
+                         ((4) (if (> (+ o 14) 21)
+                                (+ o 4)
+                                (+ o 14)))
+                         (else (display "more than 4 aces in deck"))))))
       (main hand 0 0))))
 
 ; deal! (10 pts) -- Create a two card hand, by removing the top two cards from the deck.
