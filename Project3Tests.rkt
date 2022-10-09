@@ -1,3 +1,6 @@
+(define faces '(2 3 4 5 6 7 8 9 10 J Q K A))
+(define suits '(Clubs Diamonds Hearts Spades))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; make-deck
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -94,3 +97,32 @@
 (eval-hand (list card1 card3 card4 card10 card11))
 (display " = 14") (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; deal!
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define thedeck (shuffle (make-deck)))
+
+(display "from 52 cards") (newline)
+(length (deal! thedeck))
+(display " = 2") (newline)
+
+(display "from 50 cards") (newline)
+(length (deal! thedeck))
+(display " = 2") (newline)
+
+(display "returns list") (newline)
+(list? (deal! thedeck))
+(display " = #t") (newline)
+
+(display "returns list of pairs") (newline)
+(pair? (car (deal! thedeck)))
+(display " = #t") (newline)
+
+(display "from 1 card") (newline)
+(length (deal! (list (cons '3 'Diamonds))))
+(display " = 0") (newline)
+
+(display "from 0 card") (newline)
+(length (deal! (list)))
+(display " = 0") (newline)

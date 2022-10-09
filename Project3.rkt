@@ -84,7 +84,7 @@
         (set! thedeck (cddr deck))
         hand)
       (begin
-        (display "Not two cards in deck to make a hand from")
+        (display "Not two cards in deck to make a hand from") (newline)
         (list)))))
 
 ; hit! (5 pts) -- Take the top card from the deck and add it to a hand.
