@@ -87,12 +87,31 @@
         (display "Not two cards in deck to make a hand from") (newline)
         (list)))))
 
+(define playerhand (deal! thedeck))
+(define dealerhand (deal! thedeck))
+
 ; hit! (5 pts) -- Take the top card from the deck and add it to a hand.
 ; Parameter 1: deck -- The deck to deal from
 ; Parameter 2: hand -- The hand to deal into
 ; Returns: Nothing of interest
 ; Side effects: The first card in the deck is removed from the deck and added to the hand.
 ; Example: (hit! thedeck dealerhand)
+(define hit!
+  (lambda (deck hand)
+    (if (>= (length deck) 1)
+      (case hand
+        (("player")
+         (set! playerhand (cons (car deck) playerhand))
+         (set! thedeck (cdr deck)))
+        (("dealer")
+         (set! dealerhand (cons (car deck) dealerhand))
+         (set! thedeck (cdr deck)))
+        (else
+          (display "only player and dealer supported.")
+          (newline)))
+      (begin
+        (display "Not one card in deck to hit from")
+        (newline)))))
 
 ; show-hand (5 pts) -- Display a hand (or most of it) to the screen.
 ; Parameter 1: hand -- The hand to display
