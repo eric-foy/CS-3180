@@ -20,6 +20,8 @@
                            (main-aux s (cdr f) (cons (cons (car f) s) o))))))
       (main suits '()))))
 
+(define thedeck (shuffle (make-deck)))
+
 ; eval-hand (10 pts) -- Determine the best value of a hand, given that an Ace can be worth either 1 or 11 points.
 ; Parameter: hand -- A list of cards to evaluate
 ; Returns: The best possible value of the hand
@@ -69,11 +71,21 @@
                          (else (display "more than 4 aces in deck"))))))
       (main hand 0 0))))
 
-; deal! (10 pts) -- Create a two card hand, by removing the top two cards from the deck.
+; deal! (10 pts) -- Create a two card hand, by removing the top two cards from
+; the deck.
 ; Parameter: deck -- The deck to deal from
 ; Returns: A new two-card hand, consisting of the first two cards in the deck.
 ; Side effects: The first two cards are removed from the deck. (You may choose to use a macro to do this)
 ; Example: (define playerhand (deal thedeck))
+(define deal!
+  (lambda (deck)
+    (if (>= (length deck) 2)
+      (let ((hand (list (car deck) (cadr deck))))
+        (set! thedeck (cddr deck))
+        hand)
+      (begin
+        (display "Not two cards in deck to make a hand from")
+        (list)))))
 
 ; hit! (5 pts) -- Take the top card from the deck and add it to a hand.
 ; Parameter 1: deck -- The deck to deal from
