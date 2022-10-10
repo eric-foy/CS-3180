@@ -22,7 +22,8 @@
 
 (define thedeck (shuffle (make-deck)))
 
-; eval-hand (10 pts) -- Determine the best value of a hand, given that an Ace can be worth either 1 or 11 points.
+; eval-hand (10 pts) -- Determine the best value of a hand, given that an Ace
+; can be worth either 1 or 11 points.
 ; Parameter: hand -- A list of cards to evaluate
 ; Returns: The best possible value of the hand
 ; Example: (display (eval-hand playerhand))
@@ -75,7 +76,8 @@
 ; the deck.
 ; Parameter: deck -- The deck to deal from
 ; Returns: A new two-card hand, consisting of the first two cards in the deck.
-; Side effects: The first two cards are removed from the deck. (You may choose to use a macro to do this)
+; Side effects: The first two cards are removed from the deck. (You may choose
+; to use a macro to do this)
 ; Example: (define playerhand (deal thedeck))
 (define deal!
   (lambda (deck)
@@ -94,7 +96,8 @@
 ; Parameter 1: deck -- The deck to deal from
 ; Parameter 2: hand -- The hand to deal into
 ; Returns: Nothing of interest
-; Side effects: The first card in the deck is removed from the deck and added to the hand.
+; Side effects: The first card in the deck is removed from the deck and added
+; to the hand.
 ; Example: (hit! thedeck dealerhand)
 (define hit!
   (lambda (deck hand)
@@ -107,7 +110,7 @@
          (set! dealerhand (cons (car deck) dealerhand))
          (set! thedeck (cdr deck)))
         (else
-          (display "only player and dealer supported.")
+          (display "only player and dealer supported")
           (newline)))
       (begin
         (display "Not one card in deck to hit from")
