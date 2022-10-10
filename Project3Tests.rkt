@@ -126,3 +126,47 @@
 (display "from 0 card") (newline)
 (length (deal! (list)))
 (display " = 0") (newline)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; hit!
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define playerhand (deal! thedeck))
+(define dealerhand (deal! thedeck))
+
+(display "into 2 cards") (newline)
+(define deckcount (length thedeck))
+(hit! thedeck "player")
+(length playerhand)
+(display " = 3") (newline)
+(- deckcount (length thedeck))
+(display " = 1") (newline)
+
+(display "into 3 cards") (newline)
+(hit! thedeck "player")
+(length playerhand)
+(display " = 4") (newline)
+
+(display "into 2 cards dealer") (newline)
+(define deckcount (length thedeck))
+(hit! thedeck "dealer")
+(length dealerhand)
+(display " = 3") (newline)
+(- deckcount (length thedeck))
+(display " = 1") (newline)
+
+(display "deal into not valid") (newline)
+(define deckcount (length thedeck))
+(hit! thedeck "me")
+(display " = only player and dealer supported") (newline)
+(- deckcount (length thedeck))
+(display " = 0") (newline)
+
+(display "from 1 card") (newline)
+(hit! (list (cons '3 'Diamonds)) "player")
+(length playerhand)
+(display " = 5") (newline)
+
+(display "from 0 card") (newline)
+(hit! (list) "player")
+(display " = Not one card in deck to hit from") (newline)
