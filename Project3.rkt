@@ -118,8 +118,30 @@
 
 ; show-hand (5 pts) -- Display a hand (or most of it) to the screen.
 ; Parameter 1: hand -- The hand to display
-; Parameter 2: how -- Should be either 'Full or 'Part. If how is 'Full, then show the entire hand. If how is 'Part, then show only ***** for the first card, and then show the rest of the hand normally.
-; Parameter 3: description -- A string to be displayed to the screen before the actual hand.
+; Parameter 2: how -- Should be either 'Full or 'Part. If how is 'Full, then
+; show the entire hand. If how is 'Part, then show only ***** for the first
+; card, and then show the rest of the hand normally.
+; Parameter 3: description -- A string to be displayed to the screen before the
+; actual hand.
 ; Returns: Nothing of interest
 ; Side effects: The hand is displayed to the screen
 ; Example: (show-hand dealerhand 'Part "The dealer has: ")
+(define show-hand
+  (lambda (hand how description)
+    (display description)
+    (case hand
+      (("player")
+       (case how
+         (("full")
+          (display playerhand) (newline))
+         (("part")
+          (display (cons '(*****) (cdr playerhand))) (newline))))
+      (("dealer")
+       (case how
+         (("full")
+          (display dealerhand) (newline))
+         (("part")
+          (display (cons '(*****) (cdr dealerhand))) (newline))))
+      (else
+        (display "only player and dealer supported")
+        (newline)))))
