@@ -170,3 +170,25 @@
 (display "from 0 card") (newline)
 (hit! (list) "player")
 (display " = Not one card in deck to hit from") (newline)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; show-hand
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(display "player full") (newline)
+(show-hand "player" "full" "The player has: ")
+
+(display "player part") (newline)
+(show-hand "player" "part" "The player has: ")
+
+(display "dealer full") (newline)
+(show-hand "dealer" "full" "The dealer has: ")
+
+(display "dealer part") (newline)
+(show-hand "dealer" "part" "The dealer has: ")
+
+(display "not valid hand") (newline)
+(show-hand "me" "part" "I have: ")
+
+(display "not valid part") (newline)
+(show-hand "player" "last" "The player has: ")
