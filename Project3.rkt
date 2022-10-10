@@ -133,15 +133,25 @@
       (("player")
        (case how
          (("full")
-          (display playerhand) (newline))
+          (display playerhand)
+          (newline))
          (("part")
-          (display (cons '(*****) (cdr playerhand))) (newline))))
+          (display (cons '(*****) (cdr playerhand)))
+          (newline))
+         (else
+           (display "only full and part supported")
+           (newline))))
       (("dealer")
        (case how
          (("full")
-          (display dealerhand) (newline))
+          (display dealerhand)
+          (newline))
          (("part")
-          (display (cons '(*****) (cdr dealerhand))) (newline))))
+          (display (cons '(*****) (cdr dealerhand)))
+          (newline))
+         (else
+           (display "only full and part supported")
+           (newline))))
       (else
         (display "only player and dealer supported")
         (newline)))))
