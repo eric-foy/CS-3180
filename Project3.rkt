@@ -20,8 +20,6 @@
                            (main-aux s (cdr f) (cons (cons (car f) s) o))))))
       (main suits '()))))
 
-(define thedeck (shuffle (make-deck)))
-
 ; eval-hand (10 pts) -- Determine the best value of a hand, given that an Ace
 ; can be worth either 1 or 11 points.
 ; Parameter: hand -- A list of cards to evaluate
@@ -89,9 +87,6 @@
         (display "Not two cards in deck to make a hand from") (newline)
         (list)))))
 
-(define playerhand (deal! thedeck))
-(define dealerhand (deal! thedeck))
-
 ; hit! (5 pts) -- Take the top card from the deck and add it to a hand.
 ; Parameter 1: deck -- The deck to deal from
 ; Parameter 2: hand -- The hand to deal into
@@ -129,36 +124,6 @@
 (define show-hand
   (lambda (hand how description)
     (display description)
-    (case hand
-      (("player")
-       (case how
-         (("full")
-          (display playerhand)
-          (newline))
-         (("part")
-          (display (cons '(*****) (cdr playerhand)))
-          (newline))
-         (else
-           (display "only full and part supported")
-           (newline))))
-      (("dealer")
-       (case how
-         (("full")
-          (display dealerhand)
-          (newline))
-         (("part")
-          (display (cons '(*****) (cdr dealerhand)))
-          (newline))
-         (else
-           (display "only full and part supported")
-           (newline))))
-      (else
-        (display "only player and dealer supported")
-        (newline)))))
-
-(define show-hand
-  (lambda (hand how description)
-    (display description)
     (case how
       (("full")
        (display hand)
@@ -175,5 +140,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define quota 100000)
+(display "you have $") (display quota) (newline)
+(display "do you want to play blackjack? yes or no: ")
+(if (char=? (string-ref (read-line) 0) #\y)
+  (begin
+    (define thedeck (shuffle (make-deck)))
+    (define playerhand (deal! thedeck))
+    (define dealerhand (deal! thedeck))
+    )
+  'goodbye)
 
 (if (< (eval-hand dealerhand) 17) 'hit 'hold)
