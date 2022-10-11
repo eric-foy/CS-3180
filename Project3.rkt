@@ -155,3 +155,25 @@
       (else
         (display "only player and dealer supported")
         (newline)))))
+
+(define show-hand
+  (lambda (hand how description)
+    (display description)
+    (case how
+      (("full")
+       (display hand)
+       (newline))
+      (("part")
+       (display (cons '(*****) (cdr hand)))
+       (newline))
+      (else
+        (display "only full and part supported")
+        (newline)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; main
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define quota 100000)
+
+(if (< (eval-hand dealerhand) 17) 'hit 'hold)

@@ -176,19 +176,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (display "player full") (newline)
-(show-hand "player" "full" "The player has: ")
+(show-hand playerhand "full" "The player has: ")
 
 (display "player part") (newline)
-(show-hand "player" "part" "The player has: ")
+(show-hand playerhand "part" "The player has: ")
 
 (display "dealer full") (newline)
-(show-hand "dealer" "full" "The dealer has: ")
+(show-hand dealerhand "full" "The dealer has: ")
 
 (display "dealer part") (newline)
-(show-hand "dealer" "part" "The dealer has: ")
-
-(display "not valid hand") (newline)
-(show-hand "me" "part" "I have: ")
+(show-hand dealerhand "part" "The dealer has: ")
 
 (display "not valid part") (newline)
-(show-hand "player" "last" "The player has: ")
+(show-hand playerhand "last" "The player has: ")
