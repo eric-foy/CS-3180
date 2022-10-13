@@ -1,5 +1,7 @@
 #lang racket
 ; Eric Foy
+; I'm going to allow you to bet over your over quota so you can rack up
+; gambling debt.
 
 (define faces '(2 3 4 5 6 7 8 9 10 J Q K A))
 (define suits '(Clubs Diamonds Hearts Spades))
@@ -144,9 +146,11 @@
     (case (string-trim (read-line))
       (("yes")
        (show-hand dealerhand "part" "The dealer has: ")
-       (playerturn)
-       (dealerturn)
-       (whowin)
+       (if (playerturn)
+         (if (dealerturn)
+           (whowin)
+           (playerwin))
+         (dealerwin))
        (resetgame))
       (("no")
        (display "Goodbye")
@@ -159,15 +163,29 @@
         (yesno)
         ))))
 
+(define playerwin
+  (lambda ()
+    (display "You win!") (newline)
+    (set! quota (+ quota bet))))
+
+(define dealerwin
+  (lambda ()
+    (display "Dealer wins.") (newline)
+    (set! quota (- quota bet))))
+
+(define tie
+  (lambda ()
+    (display "Tie.") (newline)))
+
 (define whowin
   (lambda ()
     (let ((pscore (eval-hand playerhand))
           (dscore (eval-hand dealerhand)))
       (if (= pscore dscore)
-        'Tie
+        (tie)
         (if (< pscore dscore)
-          'DealerWin
-          'PlayerWin)))))
+          (dealerwin)
+          (playerwin))))))
 
 (define dealerturn
   (lambda ()
@@ -176,15 +194,22 @@
       (begin
         (hit! thedeck "dealer")
         (dealerturn))
-      (begin
-        (display "Dealer turn over.")
-        (newline)))))
+      (<= (eval-hand dealerhand) 21))))
 
 (define playerturn
   (lambda ()
-    (show-hand playerhand "full" "You have: ")
-    (display "Do you want to hit or stay? ")
-    (hitstay)))
+    (if (> (eval-hand playerhand) 21)
+      (begin
+        (show-hand playerhand "full" "You bust with: ")
+        #f)
+      (if (= (eval-hand playerhand) 21)
+        (begin
+          (show-hand playerhand "full" "You blackjack!: ")
+          #t)
+        (begin
+          (show-hand playerhand "full" "You have: ")
+          (display "Do you want to hit or stay? ")
+          (hitstay))))))
 
 (define hitstay
   (lambda ()
@@ -192,9 +217,7 @@
      (("hit")
       (hit! thedeck "player")
       (playerturn))
-     (("stay")
-      (display "Player turn over.")
-      (newline))
+     (("stay") #t)
      (else
        (display "hit or stay? ")
        (hitstay)))))
