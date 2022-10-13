@@ -139,15 +139,58 @@
 ; main
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define quota 100000)
-(display "you have $") (display quota) (newline)
-(display "do you want to play blackjack? yes or no: ")
-(if (char=? (string-ref (read-line) 0) #\y)
-  (begin
-    (define thedeck (shuffle (make-deck)))
-    (define playerhand (deal! thedeck))
-    (define dealerhand (deal! thedeck))
-    )
-  'goodbye)
+(define yesno
+  (lambda ()
+    (case (string-trim (read-line))
+      (("yes")
+       (show-hand dealerhand "part" "The dealer has: ")
+       (playerturn)
+       (dealerturn))
+      (("no")
+       (display "Goodbye")
+       (newline)
+       (display "You end with $")
+       (display quota)
+       (newline))
+      (else
+        (display "yes or no? ")
+        (yesno)
+        ))))
 
-(if (< (eval-hand dealerhand) 17) 'hit 'hold)
+(define dealerturn
+  (lambda ()
+    (show-hand dealerhand "full" "The dealer has: ")
+    (if (< (eval-hand dealerhand) 17)
+      (begin
+        (hit! thedeck "dealer")
+        (dealerturn))
+      (begin
+        (display "Dealer turn over.")
+        (newline)))))
+
+(define playerturn
+  (lambda ()
+    (show-hand playerhand "full" "You have: ")
+    (display "Do you want to hit or stay? ")
+    (hitstay)))
+
+(define hitstay
+  (lambda ()
+   (case (string-trim (read-line))
+     (("hit")
+      (hit! thedeck "player")
+      (playerturn))
+     (("stay")
+      (display "Player turn over.")
+      (newline))
+     (else
+       (display "hit or stay? ")
+       (hitstay)))))
+
+(define quota 100000)
+(define thedeck (shuffle (make-deck)))
+(define playerhand (deal! thedeck))
+(define dealerhand (deal! thedeck))
+(display "You have $") (display quota) (newline)
+(display "Do you want to play blackjack, yes or no? ")
+(yesno)
