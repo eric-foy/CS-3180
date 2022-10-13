@@ -145,7 +145,9 @@
       (("yes")
        (show-hand dealerhand "part" "The dealer has: ")
        (playerturn)
-       (dealerturn))
+       (dealerturn)
+       (whowin)
+       (resetgame))
       (("no")
        (display "Goodbye")
        (newline)
@@ -156,6 +158,16 @@
         (display "yes or no? ")
         (yesno)
         ))))
+
+(define whowin
+  (lambda ()
+    (let ((pscore (eval-hand playerhand))
+          (dscore (eval-hand dealerhand)))
+      (if (= pscore dscore)
+        'Tie
+        (if (< pscore dscore)
+          'DealerWin
+          'PlayerWin)))))
 
 (define dealerturn
   (lambda ()
@@ -187,10 +199,33 @@
        (display "hit or stay? ")
        (hitstay)))))
 
+(define placebet
+  (lambda ()
+    (let ((line (string-trim (read-line))))
+      (if (string->number line)
+        (string->number line)
+        (begin
+          (display "not a number") (newline)
+          (display "How much do you bet? ") (newline)
+          (placebet))))))
+
+(define resetgame
+  (lambda ()
+    (set! thedeck (shuffle (make-deck)))
+    (set! playerhand (deal! thedeck))
+    (set! dealerhand (deal! thedeck))
+    (display "You have $") (display quota) (newline)
+    (display "How much do you bet? ") (newline)
+    (set! bet (placebet))
+    (display "Do you want to play blackjack, yes or no? ")
+    (yesno)))
+
 (define quota 100000)
 (define thedeck (shuffle (make-deck)))
 (define playerhand (deal! thedeck))
 (define dealerhand (deal! thedeck))
 (display "You have $") (display quota) (newline)
+(display "How much do you bet? ") (newline)
+(define bet (placebet))
 (display "Do you want to play blackjack, yes or no? ")
 (yesno)
