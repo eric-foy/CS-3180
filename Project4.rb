@@ -20,13 +20,28 @@ class Pair
     return (@value1 == nil && @value2 == nil)
   end
 
+  def count
+    if (!list?)
+      return false
+    end
+
+    c = 1
+    v = @value2
+    while (!v.null?)
+      c = c + 1
+      v = v.cdr
+    end
+
+    return c
+  end
+
   def list?
     if (null?)
       return true
     end
 
     if (@value2.class == Pair)
-      @value2.list?
+      return @value2.list?
     else
       return false
     end
