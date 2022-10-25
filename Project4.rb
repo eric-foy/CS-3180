@@ -2,11 +2,7 @@
 
 class Object
   def pair?
-    if (self.class == Pair)
-      true
-    else
-      false
-    end
+    return (self.class == Pair)
   end
 
   def null?
@@ -60,7 +56,7 @@ class Pair
       return true
     end
 
-    if (@value2.class == Pair || @value2 == nil)
+    if (@value2.pair? || @value2.null?)
       return @value2.list?
     else
       return false
@@ -68,9 +64,36 @@ class Pair
   end
 
   def to_s
-    #TODO test if value is a pair
-    "(#{@value1} . #{@value2})"
+    o = ""
+    v = self
+    while (v.pair? && v.cdr.pair?)
+      o = "#{o} #{v.car}"
+      v = v.cdr
+    end
+
+    if (v.cdr.null?)
+      return "(#{o.lstrip} #{v.car})"
+    else
+      return "(#{o.lstrip} #{v.car} . #{v.cdr})"
+    end
   end
+
+=begin
+  def to_s
+    if (!list?)
+      return "(#{@value1} . #{@value2})"
+    end
+
+    o = ""
+    v = self
+    while (v.list? && !v.null?)
+      o = "#{o} #{v.car}"
+      v = v.cdr
+    end
+
+    return "(#{o.lstrip})"
+  end
+=end
 end
 
 def cons(value1, value2)
