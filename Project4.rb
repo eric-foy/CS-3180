@@ -1,3 +1,23 @@
+# nil for our purposes is an empty list
+
+class Object
+  def pair?
+    if (self.class == Pair)
+      true
+    else
+      false
+    end
+  end
+
+  def null?
+    return (self == nil)
+  end
+
+  def list?
+    return (self == nil)
+  end
+end
+
 class Pair
   def initialize(value1, value2)
     @value1 = value1
@@ -5,7 +25,7 @@ class Pair
   end
 
   def self.null
-    return Pair.new(nil, nil)
+    return nil
   end
 
   def car
@@ -17,7 +37,7 @@ class Pair
   end
 
   def null?
-    return (@value1 == nil && @value2 == nil)
+    return (self == nil)
   end
 
   def count
@@ -40,7 +60,7 @@ class Pair
       return true
     end
 
-    if (@value2.class == Pair)
+    if (@value2.class == Pair || @value2 == nil)
       return @value2.list?
     else
       return false
@@ -50,12 +70,6 @@ class Pair
   def to_s
     #TODO test if value is a pair
     "(#{@value1} . #{@value2})"
-  end
-end
-
-class NilList < Pair
-  def initialize
-    super(nil, nil)
   end
 end
 
