@@ -20,10 +20,6 @@ class Pair
     @value2 = value2
   end
 
-  def self.null
-    return nil
-  end
-
   def car
     return @value1
   end
@@ -32,8 +28,31 @@ class Pair
     return @value2
   end
 
-  def null?
-    return (self == nil)
+  def to_s
+    o = ""
+    v = self
+    while (v.pair? && v.cdr.pair?)
+      o = "#{o} #{v.car}"
+      v = v.cdr
+    end
+
+    if (v.cdr.null?)
+      return "(#{o.lstrip} #{v.car})"
+    else
+      return "(#{o.lstrip} #{v.car} . #{v.cdr})"
+    end
+  end
+  
+  def list?
+    if (null?)
+      return true
+    end
+
+    if (@value2.pair? || @value2.null?)
+      return @value2.list?
+    else
+      return false
+    end
   end
 
   def count
@@ -51,49 +70,34 @@ class Pair
     return c
   end
 
-  def list?
-    if (null?)
-      return true
-    end
-
-    if (@value2.pair? || @value2.null?)
-      return @value2.list?
-    else
+  def append(other)
+    if (!list?)
       return false
     end
-  end
 
-  def to_s
-    o = ""
-    v = self
-    while (v.pair? && v.cdr.pair?)
-      o = "#{o} #{v.car}"
+    o = [car]
+    v = @value2
+    while (!v.cdr.null?)
+      o = o + [v.car]
       v = v.cdr
     end
+    o = o.reverse
 
-    if (v.cdr.null?)
-      return "(#{o.lstrip} #{v.car})"
-    else
-      return "(#{o.lstrip} #{v.car} . #{v.cdr})"
+    p = Pair.new(v.car, other)
+    for i in o
+      p = Pair.new(i, p)
     end
+
+    return p
   end
 
-=begin
-  def to_s
-    if (!list?)
-      return "(#{@value1} . #{@value2})"
-    end
-
-    o = ""
-    v = self
-    while (v.list? && !v.null?)
-      o = "#{o} #{v.car}"
-      v = v.cdr
-    end
-
-    return "(#{o.lstrip})"
+  def null?
+    return (self == nil)
   end
-=end
+
+  def self.null
+    return nil
+  end
 end
 
 def cons(value1, value2)
