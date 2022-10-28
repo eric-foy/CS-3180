@@ -36,10 +36,11 @@ class Pair
       v = v.cdr
     end
 
+    o = "#{o} #{v.car}"
     if (v.cdr.null?)
-      return "(#{o.lstrip} #{v.car})"
+      return "(#{o.lstrip})"
     else
-      return "(#{o.lstrip} #{v.car} . #{v.cdr})"
+      return "(#{o.lstrip} . #{v.cdr})"
     end
   end
   
