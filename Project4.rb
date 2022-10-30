@@ -25,6 +25,17 @@ class Object
   def list?
     return (self == nil)
   end
+
+  # An empty list's length in Racket is 0
+  # Parameters: None
+  # Returns: 0 if empty list, false otherwise
+  def count
+    if (self == nil)
+      return 0
+    else
+      return false
+    end
+  end
 end
 
 # A Ruby class called Pair that provides much of the functionality of the cons
