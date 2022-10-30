@@ -25,7 +25,7 @@ puts Pair.new(1, 2).pair?
 puts " = true"
 
 ##############################
-# Object.null?
+# Object.null? and Pair.null?
 ##############################
 
 puts 6
@@ -239,3 +239,35 @@ puts " = false"
 puts 48
 puts cons(cons(8, 9), cons(2, cons(3, Pair.null))).count
 puts " = 3"
+
+##############################
+# Pair.append(other), Pair.null, and Object.append(other)
+##############################
+
+puts 49
+puts Pair.null().append(5)
+puts " = 5"
+
+puts 50
+puts Pair.null().append(cons(1, cons(2, Pair.null)))
+puts " = (1 2)"
+
+puts 51
+puts cons(1, cons(2, Pair.null)).append(5)
+puts " = (1 2 . 5)"
+
+puts 52
+puts cons(1, 2).append(5)
+puts " = false"
+
+puts 53
+puts 3.append(5)
+puts " = false"
+
+puts 54
+puts cons(1, cons(2, Pair.null)).append(cons(3, cons(4, Pair.null)))
+puts " = (1 2 3 4)"
+
+puts 55
+puts cons(1, cons(2, Pair.null)).append(Pair.null)
+puts " = (1 2)"
