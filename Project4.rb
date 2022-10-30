@@ -61,15 +61,33 @@ class Pair
     o = ""
     v = self
     while (v.pair? && v.cdr.pair?)
-      o = "#{o} #{v.car}"
+      # strings in DrRacket appear with their parentheses
+      a = v.car
+      if (a.class == String)
+        a = '"' + a + '"'
+      end
+
+      o = "#{o} #{a}"
       v = v.cdr
     end
 
-    o = "#{o} #{v.car}"
+    # strings in DrRacket appear with their parentheses
+    b = v.car
+    if (b.class == String)
+      b = '"' + b + '"'
+    end
+
+    o = "#{o} #{b}"
     if (v.cdr.null?)
       return "(#{o.lstrip})"
     else
-      return "(#{o.lstrip} . #{v.cdr})"
+      # strings in DrRacket appear with their parentheses
+      c = v.cdr
+      if (c.class == String)
+        c = '"' + c + '"'
+      end
+
+      return "(#{o.lstrip} . #{c})"
     end
   end
   
