@@ -36,6 +36,18 @@ class Object
       return false
     end
   end
+
+  # You can append to empty lists in racket
+  # Parameters:
+  # other - a list or an atomic data type
+  # Returns: other if empty list
+  def append(other)
+    if (self == nil)
+      return other
+    else
+      return false
+    end
+  end
 end
 
 # A Ruby class called Pair that provides much of the functionality of the cons
