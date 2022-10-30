@@ -73,9 +73,77 @@ puts Pair.new(1, 2).list?
 puts " = false"
 
 ##############################
-# Pair.new()
+# Pair.new, Pair.to_s, and cons
 ##############################
 
 puts 16
 puts Pair.new(1, 2).to_s
 puts " = (1 . 2)"
+
+puts 17
+puts Pair.new("bla", "hi").to_s
+puts ' = ("bla" . "hi")'
+
+puts 18
+puts Pair.new("bla", 5).to_s
+puts ' = ("bla" . 5)'
+
+puts 19
+puts Pair.new(5, "bla").to_s
+puts ' = (5 . "bla")'
+
+puts 20
+puts Pair.new("bla", Pair.new("hi", "you")).to_s
+puts ' = ("bla" "hi" . "you")'
+
+puts 21
+puts cons(1, cons(2, cons(3, cons(4, Pair.null))))
+puts " = (1 2 3 4)"
+
+puts 22
+puts cons(1, cons(cons(2, 3), cons(4, Pair.null)))
+puts " = (1 (2 . 3) 4)"
+
+puts 23
+puts cons(1, cons(2, cons(cons(3, cons(cons(4, 5), Pair.null)), Pair.null)))
+puts " = (1 2 (3 (4 . 5)))"
+
+puts 24
+puts cons(1, cons(2, cons(cons(3, cons(4, cons(5, Pair.null))), Pair.null)))
+puts " = (1 2 (3 4 5))"
+
+puts 25
+puts cons(cons(1, 2), cons(cons(3, 4), 5))
+puts " = ((1 . 2) (3 . 4) . 5)"
+
+puts 26
+puts cons(1, cons(2, cons(3, Pair.null)))
+puts " = (1 2 3)"
+
+puts 27
+puts cons(1, cons(2, cons(3, 4)))
+puts " = (1 2 3 . 4)"
+
+puts 28
+puts cons(1, cons(2, cons(cons(3, 4), cons(5, 6))))
+puts " = (1 2 (3 . 4) 5 . 6)"
+
+puts 29
+puts cons(1, cons(cons(Pair.null, 2), cons(3, Pair.null)))
+puts " = (1 (() . 2) 3)"
+
+puts 30
+puts cons(cons(cons(2, 3), cons(4, 5)), cons(6, 7))
+puts " = (((2 . 3) 4 . 5) 6 . 7)"
+
+puts 31
+puts cons(1, cons(2, cons(3, cons(4, Pair.null))))
+puts " = (1 2 3 4)"
+
+puts 32
+puts cons(1, cons(2, 3))
+puts " = (1 2 . 3)"
+
+puts 33
+puts cons(1, cons(cons(2, cons(3, Pair.null)), cons(4, cons(5, Pair.null))))
+puts " = (1 (2 3) 4 5)"
