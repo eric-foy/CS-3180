@@ -45,7 +45,7 @@ puts "".null?
 puts " = false"
 
 puts 10
-puts Pair.new().null?
+puts Pair.new(1, 2).null?
 puts " = false"
 
 ##############################
@@ -69,5 +69,13 @@ puts "".list?
 puts " = false"
 
 puts 15
-puts Pair.new().list?
+puts Pair.new(1, 2).list?
 puts " = false"
+
+##############################
+# Pair.new()
+##############################
+
+puts 16
+puts Pair.new(1, 2).to_s
+puts " = (1 . 2)"
