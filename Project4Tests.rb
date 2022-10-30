@@ -147,3 +147,63 @@ puts " = (1 2 . 3)"
 puts 33
 puts cons(1, cons(cons(2, cons(3, Pair.null)), cons(4, cons(5, Pair.null))))
 puts " = (1 (2 3) 4 5)"
+
+##############################
+# Pair.car
+##############################
+
+puts 34
+puts Pair.new(1, 2).car
+puts " = 1"
+
+puts 35
+puts Pair.new("bla", 2).car
+puts " = bla"
+
+puts 36
+puts Pair.new(Pair.new(1, 2), 3).car().to_s
+puts " = (1 . 2)"
+
+puts 37
+puts Pair.new(nil, 4).car
+puts " = "
+
+##############################
+# Pair.cdr
+##############################
+
+puts 34
+puts Pair.new(1, 2).cdr
+puts " = 2"
+
+puts 35
+puts Pair.new(2, "bla").cdr
+puts " = bla"
+
+puts 36
+puts Pair.new(Pair.new(1, 2), 3).cdr().to_s
+puts " = 3"
+
+puts 37
+puts Pair.new(4, nil).cdr
+puts " = "
+
+##############################
+# Pair.list?
+##############################
+
+puts 38
+puts Pair.new(1, Pair.null).list?
+puts " = true"
+
+puts 39
+puts nil.list?
+puts " = true"
+
+puts 40
+puts "bla".list?
+puts " = false"
+
+puts 41
+puts Pair.new(1, 2).list?
+puts " = false"
