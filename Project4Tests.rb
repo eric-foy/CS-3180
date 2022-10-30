@@ -207,3 +207,35 @@ puts " = false"
 puts 41
 puts Pair.new(1, 2).list?
 puts " = false"
+
+##############################
+# Pair.count and Object.count
+##############################
+
+puts 42
+puts Pair.null().count
+puts " = 0"
+
+puts 43
+puts cons(1, Pair.null).count
+puts " = 1"
+
+puts 44
+puts cons(1, cons(2, Pair.null)).count
+puts " = 2"
+
+puts 45
+puts cons(1, cons(2, cons(3, Pair.null))).count
+puts " = 3"
+
+puts 46
+puts 2.count
+puts " = false"
+
+puts 47
+puts Pair.new(1, 2).count
+puts " = false"
+
+puts 48
+puts cons(cons(8, 9), cons(2, cons(3, Pair.null))).count
+puts " = 3"
