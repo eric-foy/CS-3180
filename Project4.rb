@@ -61,20 +61,26 @@ class Pair
     o = ""
     v = self
     while (v.pair? && v.cdr.pair?)
-      # strings in DrRacket appear with their parentheses
+      # strings in DrRacket appear with their parentheses,
+      # empty lists appear like ()
       a = v.car
       if (a.class == String)
         a = '"' + a + '"'
+      elsif (a == nil)
+        a = "()"
       end
 
       o = "#{o} #{a}"
       v = v.cdr
     end
 
-    # strings in DrRacket appear with their parentheses
+    # strings in DrRacket appear with their parentheses,
+    # empty lists appear like ()
     b = v.car
     if (b.class == String)
       b = '"' + b + '"'
+    elsif (b == nil)
+      b = "()"
     end
 
     o = "#{o} #{b}"
