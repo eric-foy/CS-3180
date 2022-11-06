@@ -28,7 +28,7 @@ class BST
     else
       n = @head
       while (true)
-        if (item >= n.value)
+        if (@compare_method.call(item, n.value) >= 0)
           if (n.right == nil)
             n.right = Node.new(item)
             return nil
