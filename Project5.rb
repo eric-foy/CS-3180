@@ -23,8 +23,27 @@ class BST
 
   def add(item)
     if (@head == nil)
-      @head = item
-      return self
+      @head = Node.new(item)
+      return nil
+    else
+      n = @head
+      while (true)
+        if (item >= n.value)
+          if (n.right == nil)
+            n.right = Node.new(item)
+            return nil
+          else
+            n = n.right
+          end
+        else
+          if (n.left == nil)
+            n.left = Node.new(item)
+            return nil
+          else
+            n = n.left
+          end
+        end
+      end
     end
   end
 
