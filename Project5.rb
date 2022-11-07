@@ -22,7 +22,7 @@ class BST
   end
 
   def add(item)
-    if (@head == nil)
+    if (empty?)
       @head = Node.new(item)
       return nil
     else
@@ -49,6 +49,28 @@ class BST
 
   def empty?
     return (@head == nil)
+  end
+
+  def include?(item)
+    if (empty?)
+      return false
+    end
+
+    n = @head
+    while (n != nil)
+      case @compare_method.call(item, n.value)
+      when 0
+        return true
+      when -1
+        n = n.left
+      when 1
+        n = n.right
+      else
+        puts("Error: compare method returns not in [-1, 0, 1]")
+      end
+    end
+
+    return false
   end
 
   def test
