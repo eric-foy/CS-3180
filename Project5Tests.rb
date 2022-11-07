@@ -7,6 +7,17 @@ b.add(28)
 b.add(25)
 b.add(33)
 
+b.include?(5)
+b.include?(24)
+b.include?(13)
+b.include?(10)
+b.include?(15)
+b.include?(28)
+b.include?(25)
+b.include?(33)
+b.include?(24)
+b.add(24)
+b.include?(24)
 
 b = BST.new{ |a, b| if (a > b) then -1 elsif (a > b) then 1 else 0 end }
 b.add(24)
