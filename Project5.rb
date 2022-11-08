@@ -73,6 +73,44 @@ class BST
     return false
   end
 
+  def size
+    s = []
+    n = @head
+    c = 0
+    while (true)
+      while (n != nil)
+        s.push(n)
+        n = n.left
+      end
+      n = s.pop
+      if (n == nil)
+        break
+      end
+      puts(n.value)
+      c = c + 1
+      n = n.right
+    end
+
+    return c
+  end
+
+  def each_inorder
+    s = []
+    n = @head
+    while (true)
+      while (n != nil)
+        s.push(n)
+        n = n.left
+      end
+      n = s.pop
+      if (n == nil)
+        break
+      end
+      yield n.value
+      n = n.right
+    end
+  end
+
   def test
     puts @compare_method.call(8, 5)
     puts @compare_method.call(5, 5)
