@@ -111,6 +111,29 @@ class BST
     end
   end
 
+  def collect_inorder
+    s = []
+    c = []
+    n = @head
+    while (true)
+      while (n != nil)
+        s.push(n)
+        n = n.left
+      end
+      n = s.pop
+      if (n == nil)
+        break
+      end
+      c.push(yield n.value)
+      n = n.right
+    end
+
+    #todo pass compare method
+    b = BST.new
+    c.each{ |x| b.add(x) }
+    return b
+  end
+
   def test
     puts @compare_method.call(8, 5)
     puts @compare_method.call(5, 5)
