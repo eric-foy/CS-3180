@@ -134,6 +134,26 @@ class BST
     return b
   end
 
+  def to_a
+    s = []
+    c = []
+    n = @head
+    while (true)
+      while (n != nil)
+        s.push(n)
+        n = n.left
+      end
+      n = s.pop
+      if (n == nil)
+        break
+      end
+      c.push(n.value)
+      n = n.right
+    end
+
+    return c
+  end
+
   def test
     puts @compare_method.call(8, 5)
     puts @compare_method.call(5, 5)
