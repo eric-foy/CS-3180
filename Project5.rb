@@ -154,6 +154,29 @@ class BST
     return c
   end
 
+  def dup
+    s = []
+    c = []
+    n = @head
+    while (true)
+      while (n != nil)
+        c.push(n.value)
+        s.push(n)
+        n = n.left
+      end
+      n = s.pop
+      if (n == nil)
+        break
+      end
+      n = n.right
+    end
+
+    #todo pass compare method
+    b = BST.new
+    c.each{ |x| b.add(x) }
+    return b
+  end
+
   def test
     puts @compare_method.call(8, 5)
     puts @compare_method.call(5, 5)
