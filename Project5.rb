@@ -86,7 +86,6 @@ class BST
       if (n == nil)
         break
       end
-      puts(n.value)
       c = c + 1
       n = n.right
     end
