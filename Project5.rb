@@ -17,7 +17,7 @@ class BST
     if (block_given?)
       @compare_method = compare_method
     else
-      @compare_method = proc { |a, b| a <=> b }
+      @compare_method = Proc.new { |a, b| a <=> b }
     end
   end
 
