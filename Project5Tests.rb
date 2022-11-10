@@ -1,4 +1,36 @@
 ##################################################
+# collect_inorder
+##################################################
+
+b = BST.new()
+b.add(24)
+b.add(13)
+b.add(10)
+b.add(15)
+b.add(28)
+b.add(25)
+b.add(33)
+
+b.each_inorder{ |x| puts x }
+b.each_inorder{ |x| print(x, " ") }
+
+##################################################
+# size
+##################################################
+
+b = BST.new()
+b.size
+b.add(1000)
+b.size
+b.add(2)
+b.size
+b.add(100)
+b.size
+
+b2 = b.dup
+b2.size
+
+##################################################
 # empty?
 ##################################################
 
@@ -49,7 +81,7 @@ b.include?(24)
 
 
 ##################################################
-# initialize and add
+# initialize
 ##################################################
 
 b = BST.new{ |a, b| if (a > b) then -1 elsif (a > b) then 1 else 0 end }
@@ -62,6 +94,10 @@ b.add(25)
 b.add(33)
 b.to_a
 
+##################################################
+# add
+##################################################
+
 b = BST.new
 b.add(33)
 b.add(30)
@@ -77,6 +113,72 @@ b.add(28)
 b.add(30)
 b.add(33)
 b
+
+b = BST.new
+b.add(10)
+b.add(8)
+b
+
+b = BST.new
+b.add(10)
+b.add(13)
+b
+
+##################################################
+# to_a
+##################################################
+
+b = BST.new
+b.add(33)
+b.add(30)
+b.add(28)
+b.add(25)
+b.add(15)
+b.to_a
+
+b = BST.new
+b.add(15)
+b.add(25)
+b.add(28)
+b.add(30)
+b.add(33)
+b.to_a
+
+b = BST.new
+b.add(10)
+b.add(8)
+b.to_a
+
+b = BST.new
+b.add(10)
+b.add(13)
+b.to_a
+
+b = BST.new{ |a, b| if (a > b) then -1 elsif (a > b) then 1 else 0 end }
+b.add(33)
+b.add(30)
+b.add(28)
+b.add(25)
+b.add(15)
+b.to_a
+
+b = BST.new{ |a, b| if (a > b) then -1 elsif (a > b) then 1 else 0 end }
+b.add(15)
+b.add(25)
+b.add(28)
+b.add(30)
+b.add(33)
+b.to_a
+
+b = BST.new{ |a, b| if (a > b) then -1 elsif (a > b) then 1 else 0 end }
+b.add(10)
+b.add(8)
+b.to_a
+
+b = BST.new{ |a, b| if (a > b) then -1 elsif (a > b) then 1 else 0 end }
+b.add(10)
+b.add(13)
+b.to_a
 
 ##################################################
 # dup
