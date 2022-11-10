@@ -128,8 +128,7 @@ class BST
       n = n.right
     end
 
-    #todo pass compare method
-    b = BST.new
+    b = BST.new(&@compare_method)
     c.each{ |x| b.add(x) }
     return b
   end
@@ -171,8 +170,7 @@ class BST
       n = n.right
     end
 
-    #todo pass compare method
-    b = BST.new
+    b = BST.new(&@compare_method)
     c.each{ |x| b.add(x) }
     return b
   end
