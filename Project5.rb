@@ -117,6 +117,7 @@ class BST
     n = @head
     while (true)
       while (n != nil)
+        c.push(yield n.value)
         s.push(n)
         n = n.left
       end
@@ -124,7 +125,6 @@ class BST
       if (n == nil)
         break
       end
-      c.push(yield n.value)
       n = n.right
     end
 
