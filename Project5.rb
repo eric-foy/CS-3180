@@ -173,10 +173,4 @@ class BST
     c.each{ |x| b.add(x) }
     return b
   end
-
-  def test
-    puts @compare_method.call(8, 5)
-    puts @compare_method.call(5, 5)
-    puts @compare_method.call(5, 8)
-  end
 end
