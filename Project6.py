@@ -1,3 +1,5 @@
+import random
+
 words = []
 try:
     f = open('wordlist.txt', 'r')
@@ -26,4 +28,16 @@ while not (int(n) in allWords.keys()):
         n = input('Thats not a number, what length would you like? ')
 
 possibleWords = allWords[int(n)]
-print(possibleWords)
+word = random.choice(possibleWords)
+dispWord = '*' * int(n)
+guesses = 2 * int(n) - 1
+print('Word: {}'.format(dispWord))
+print('You have {} guesses remaining.'.format(guesses))
+guess = input('Type a letter or a word guess: ')
+while not guess.isalpha():
+    n = input('Not a letter or word, Type a letter or word: ')
+while len(n) == 2 or len(n) > maxn:
+    n = input('2 letters in not a word, Type a letter or word: ')
+    while not guess.isalpha():
+        n = input('Not a letter or word, Type a letter or word: ')
+
