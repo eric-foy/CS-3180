@@ -20,24 +20,31 @@ maxn = max(allWords.keys())
 
 print('Welcome to Hangman')
 n = input('What length word would you like to play? (3 to {}) '.format(maxn))
-while not n.isdigit():
-    n = input('Thats not a number, what length would you like? ')
-while not (int(n) in allWords.keys()):
-    n = input('No words of length {}, what length would you like? '.format(n))
-    while not n.isdigit():
-        n = input('Thats not a number, what length would you like? ')
+while not n.isdigit() or not int(n) in allWords.keys():
+    n = input('Thats not a valid, what length would you like? ')
 
 possibleWords = allWords[int(n)]
 word = random.choice(possibleWords)
 dispWord = '*' * int(n)
 guesses = 2 * int(n) - 1
-print('Word: {}'.format(dispWord))
-print('You have {} guesses remaining.'.format(guesses))
-guess = input('Type a letter or a word guess: ')
-while not guess.isalpha():
-    n = input('Not a letter or word, Type a letter or word: ')
-while len(n) == 2 or len(n) > maxn:
-    n = input('2 letters in not a word, Type a letter or word: ')
-    while not guess.isalpha():
-        n = input('Not a letter or word, Type a letter or word: ')
+prevGuesses = []
 
+while guesses > 0 and dispWord != word:
+    print('')
+    print('Word: {}'.format(dispWord))
+    print('You have {} guesses remaining.'.format(guesses))
+    guess = input('Type a letter or a word guess: ')
+    while not guess.isalpha() or len(guess) == 2 or len(guess) > maxn:
+        guess = input('Thats not valid, type a letter or word: ')
+
+    if not guess in prevGuesses:
+        prevGuesses += guess
+        guesses -= 1
+        if len(guess) == 1:
+            found = word.find(guess)
+            if found == -1:
+                print("Sorry, there are no {}'s".format(guess))
+            else:
+                dispList = list(dispWord)
+                dispList[found] = word[found]
+                dispWord = ''.join(dispList)
