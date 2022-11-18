@@ -37,14 +37,38 @@ while guesses > 0 and dispWord != word:
     while not guess.isalpha() or len(guess) == 2 or len(guess) > maxn:
         guess = input('Thats not valid, type a letter or word: ')
 
-    if not guess in prevGuesses:
-        prevGuesses += guess
+    if guess in prevGuesses:
+        print('you guessed {} before!'.format(guess))
+    else:
+        prevGuesses += [guess]
         guesses -= 1
         if len(guess) == 1:
+            finds = []
             found = word.find(guess)
-            if found == -1:
+            while found != -1:
+                finds += [found]
+                found = word.find(guess, found + 1)
+
+            if len(finds) == 0:
                 print("Sorry, there are no {}'s".format(guess))
-            else:
+            elif len(finds) == 1:
+                print('There is 1 {}!'.format(guess))
                 dispList = list(dispWord)
-                dispList[found] = word[found]
+                dispList[finds[0]] = guess
                 dispWord = ''.join(dispList)
+            else:
+                print("There are 2 {}'s!".format(guess))
+                for f in finds:
+                    dispList = list(dispWord)
+                    dispList[f] = guess
+                    dispWord = ''.join(dispList)
+        else:
+            if guess == word:
+                dispWord = guess
+            else:
+                print("Sorry, the word is not '{}'".format(guess))
+
+if dispWord == word:
+    print('Congratulations, you guessed it!')
+
+print('Game over')
