@@ -1,0 +1,12 @@
+4
+a
+a
+dog
+a
+dog
+dog
+b
+c
+cat
+d
+e
