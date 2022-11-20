@@ -1,5 +1,10 @@
+# Eric Foy
 import random
 
+# When executed, your program should look for the file wordlist.txt in the same
+# directory as your main program script. It should load the list of possible
+# words from this file. If this file is not present, your program should exit
+# gracefully.
 words = []
 try:
     f = open('wordlist.txt', 'r')
@@ -9,6 +14,8 @@ except FileNotFoundError:
     print('wordlist.txt not found')
     exit()
 
+# A reasonable way to organize your data would be a dictionary(hash) where each
+# key is a number n, and each value is a list of words with length n letters. 
 allWords = {}
 for i in words:
     if len(i) in allWords.keys():
@@ -16,24 +23,36 @@ for i in words:
     else:
         allWords[len(i)] = [i]
 
+# Your game should be playable for any number of letters from 3 to the number
+# of letters in the longest word in the text file.
 maxn = max(allWords.keys())
-
 print('Welcome to Hangman')
 n = input('What length word would you like to play? (3 to {}) '.format(maxn))
 while not n.isdigit() or not int(n) in allWords.keys():
     n = input('Thats not a valid, what length would you like? ')
 
+# Each time your game is played, it should randomly select a word of the
+# appropriate length.  Playing the game repeatedly with the same number of
+# letters should not result in the same word being repeatedly chosen.
 possibleWords = allWords[int(n)]
 word = random.choice(possibleWords)
 dispWord = '*' * int(n)
+
+# Number of guesses for a word of length n is (2n -1)
 guesses = 2 * int(n) - 1
 prevGuesses = []
 
+# The user wins when they correctly guess the word, or all the letters in the
+# word have been guessed. The user loses if they have no more guesses remaining
+# and they have not yet won
 while guesses > 0 and dispWord != word:
     print('')
     print('Word: {}'.format(dispWord))
     print('You have {} guesses remaining.'.format(guesses))
     guess = input('Type a letter or a word guess: ')
+
+    # Any input of length 2 or more than n, the program should re-prompt the
+    # user.
     while not guess.isalpha() or len(guess) == 2 or len(guess) > maxn:
         guess = input('Thats not valid, type a letter or word: ')
 
@@ -42,6 +61,10 @@ while guesses > 0 and dispWord != word:
     else:
         prevGuesses += [guess]
         guesses -= 1
+
+        # When prompted for a letter or word guess, any input of length 1
+        # should be treated as a letter. Any input of length 3 or more should
+        # be treated as a word guess (upper or lower case)
         if len(guess) == 1:
             finds = []
             found = word.find(guess)
