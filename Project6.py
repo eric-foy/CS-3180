@@ -57,7 +57,7 @@ while guesses > 0 and dispWord != word:
                 dispList[finds[0]] = guess
                 dispWord = ''.join(dispList)
             else:
-                print("There are 2 {}'s!".format(guess))
+                print("There are {} {}'s!".format(len(finds), guess))
                 for f in finds:
                     dispList = list(dispWord)
                     dispList[f] = guess
