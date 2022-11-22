@@ -38,6 +38,7 @@ while playing:
     possibleWords = allWords[int(n)]
     word = possibleWords[0]
     possibleWords = possibleWords[1:] + [word]
+    allWords[int(n)] = possibleWords
     dispWord = '*' * int(n)
 
     # Number of guesses for a word of length n is (2n -1)
