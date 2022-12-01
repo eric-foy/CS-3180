@@ -71,6 +71,7 @@ try:
     # classes:
     # Student record order: UID, FIRST, LAST, LEVEL, CLASSES 
     for line in lines:
+        line = line.replace(' ', '\t')
         d = line.split('\t')
         d = [x for x in d if x != '']
         s = Student(d[0], d[1], d[2], d[3])
