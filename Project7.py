@@ -21,11 +21,14 @@ class Student:
         a = 'UID: {}\n'.format(self.uid)
         b = 'First Name: {}\n'.format(self.first)
         c = 'Last Name: {}\n'.format(self.last)
-        d = 'Level: {}'.format(self.level)
-        return a + b + c + d
-
-    def reset(self):
+        d = 'Level: {}\n'.format(self.level)
+        e = 'CLASSES:\n'
+        o = a + b + c + d + e
         self.index = 0
+        for i in iter(self):
+            o += '{}\n'.format(i)
+        f = '-----------\n'
+        return o + f + f
 
     def addClass(self, c):
         self.classes += [c]
@@ -51,12 +54,6 @@ print('===============')
 print('')
 for i in students:
     print(i)
-    print('CLASSES:')
-    for j in iter(i):
-        print(j)
-    print('-----------')
-    print('-----------')
-    print('')
 
 f = open('studentRecordsOut.txt', 'w')
 f.write('Student Records\n')
@@ -64,13 +61,5 @@ f.write('===============\n')
 f.write('\n')
 for i in students:
     f.write(str(i))
-    f.write('\n')
-    i.reset()
-    f.write('CLASSES:\n')
-    for j in iter(i):
-        f.write(j)
-        f.write('\n')
-    f.write('-----------\n')
-    f.write('-----------\n')
     f.write('\n')
 f.close()
