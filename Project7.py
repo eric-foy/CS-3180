@@ -1,4 +1,15 @@
+# Eric Foy
+
+# Your program must have at least one defined class "Student" to hold a student
+# record, a method addClass, and an iterator method. You may define more
+# classes and methods as you need.
 class Student:
+    # Create a new student object.
+    # Parameters:
+    # uid - user id
+    # first - first name
+    # last - last name
+    # level - grad or undergrad
     def __init__(self, uid, first, last, level):
         self.uid = uid
         self.first = first
@@ -7,9 +18,15 @@ class Student:
         self.classes = []
         self.index = 0
 
+    # Used in the call to iter() to iterate over classes.
+    # Returns: self
+    # Parameters: None
     def __iter__(self):
         return self
 
+    # Used in the iteration of classes to get next class.
+    # Returns: next class
+    # Parameters: None
     def __next__(self):
         if self.index == len(self.classes):
             raise StopIteration
@@ -17,6 +34,9 @@ class Student:
         self.index = self.index + 1
         return o
 
+    # A string representation of a Student object.
+    # Returns: string representation of a student
+    # Parameters: None
     def __str__(self):
         a = 'UID: {}\n'.format(self.uid)
         b = 'First Name: {}\n'.format(self.first)
@@ -30,13 +50,26 @@ class Student:
         f = '-----------\n'
         return o + f + f
 
+    # Add a class
+    # Returns: self
+    # Parameters:
+    # c - class to add
     def addClass(self, c):
         self.classes += [c]
+        return self
 
+# When executed, your program should look for the file studentRecordsIn.txt
+# (provided) in the same directory as your main program script. It should load
+# the list of records from this file. If this file is not present, your program
+# should exit gracefully (with a message).
 students = []
 try:
     f = open('studentRecordsIn.txt', 'r')
     lines = f.read().split('\n')
+
+    # Each line is a full student record with the last words are for the
+    # classes:
+    # Student record order: UID, FIRST, LAST, LEVEL, CLASSES 
     for line in lines:
         d = line.split('\t')
         d = [x for x in d if x != '']
@@ -49,12 +82,15 @@ except FileNotFoundError:
     print('studentRecordsIn.txt not found')
     exit()
 
+# After reading records, your program should output the data to the console.
 print('Student Records')
 print('===============')
 print('')
 for i in students:
     print(i)
 
+# Then print the output to text file studentRecordsOut.txt in the same format
+# and save it in the same directory.
 f = open('studentRecordsOut.txt', 'w')
 f.write('Student Records\n')
 f.write('===============\n')
