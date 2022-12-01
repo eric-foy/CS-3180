@@ -1,10 +1,10 @@
 class Student:
-    def __init__(self, uid, first, last, level, classes):
+    def __init__(self, uid, first, last, level):
         self.uid = uid
         self.first = first
         self.last = last
         self.level = level
-        self.classes = classes
+        self.classes = []
         self.index = 0
 
     def __iter__(self):
@@ -27,6 +27,9 @@ class Student:
     def reset(self):
         self.index = 0
 
+    def addClass(self, c):
+        self.classes += [c]
+
 students = []
 try:
     f = open('studentRecordsIn.txt', 'r')
@@ -34,7 +37,10 @@ try:
     for line in lines:
         d = line.split('\t')
         d = [x for x in d if x != '']
-        students += [Student(d[0], d[1], d[2], d[3], d[4:])]
+        s = Student(d[0], d[1], d[2], d[3])
+        for i in d[4:]:
+            s.addClass(i)
+        students += [s]
     f.close()
 except FileNotFoundError:
     print('studentRecordsIn.txt not found')
