@@ -2,4 +2,8 @@
 222	Amanda	Clark	Undergrad	CEG3310	MTH2570
 333	John	Thomas	Undergrad	CS3100	CEG2170	MTH2570
 444	Sara	North	Grad	CS3180	CEG2170	CEG3310
-555	Mark	Smith	Undergrad	CEG2170	CEG3310	MTH2570	CS3100		
+555	Mark	Smith	Undergrad	CEG2170	CEG3310	MTH2570	CS3100
+666     Eric    Foy     Undergrad       CS3180  STT5600
+777     Eric2	Foy2    Undergrad	CS3180	STT5600
+888     Eric3	Foy3    Undergrad	CS3180
+999     Eric4	Foy4    Undergrad
